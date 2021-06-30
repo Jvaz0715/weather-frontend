@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import ShowWeather from "./components/ShowWeather/ShowWeather";
 import ShowAllLocation from "./components/ShowAllLocation/ShowAllLocation";
-require("dotenv").config();
 
+require("dotenv").config();
 
 export class App extends Component {
   state = {
@@ -15,11 +15,14 @@ export class App extends Component {
     errorMessage: "",
     locationArray: [],
   };
+
+
   handleOnChange = (event) => {
     this.setState({
       input: event.target.value,
     });
   };
+
   async componentDidMount() {
     try {
       let allLocation = await axios.get(
@@ -33,7 +36,8 @@ export class App extends Component {
         errorMessage: e.response.data.message,
       });
     }
-  }
+  };
+
   handleSearchSubmit = async () => {
     if (this.state.input.length === 0) {
       this.setState({
@@ -76,6 +80,7 @@ export class App extends Component {
       }
     }
   };
+
   handleDeleteByID = async (id) => {
     try {
       let deleted = await axios.delete(
@@ -93,19 +98,25 @@ export class App extends Component {
       });
     }
   };
+
   render() {
-    //console.log(this.state);
+    
     return (
       <div style={{ textAlign: "center", marginTop: "8%" }}>
+        
         <h1>Weather Search App</h1>
+        
         <input
           onChange={this.handleOnChange}
           type="text"
           value={this.state.input}
           name="input"
         />
+        
         <button onClick={this.handleSearchSubmit}>Submit</button>
+        
         <div>{this.state.errorMessage && this.state.errorMessage}</div>
+        
         <div>
           <ShowWeather
             targetName={this.state.targetName}
@@ -114,12 +125,14 @@ export class App extends Component {
             haveInfo={this.state.haveInfo}
           />
         </div>
+
         <div>
           <ShowAllLocation
             locationArray={this.state.locationArray}
             handleDeleteByID={this.handleDeleteByID}
           />
         </div>
+
       </div>
     );
   }
