@@ -1,0 +1,17 @@
+.current-city-weather{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-container {
+    border: 1px solid blue;
+    background-color: rgba(133, 133, 198, 0.612);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

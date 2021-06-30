@@ -6,6 +6,7 @@ import ShowAllLocation from "./components/ShowAllLocation/ShowAllLocation";
 require("dotenv").config();
 
 export class App extends Component {
+  
   state = {
     input: "",
     targetName: "",
@@ -13,7 +14,7 @@ export class App extends Component {
     info: null,
     haveInfo: false,
     errorMessage: "",
-    locationArray: [],
+    locationArray: [], /* this will store the recently searched*/
   };
 
 
@@ -46,8 +47,9 @@ export class App extends Component {
     } else {
       try {
         let result = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${this.state.input}&appid=${process.env.API_KEY}&units=imperial`
+          `https://api.openweathermap.org/data/2.5/weather?q=${this.state.input}&appid=${process.env.REACT_APP_WEATHER_KEY}&units=imperial`
         );
+        // ${process.env.REACT_APP_WEATHER_KEY}
         let foundIndex = this.state.locationArray.findIndex((item) => {
           if (item.city === result.data.name && result.data.sys.country) {
             return item;
